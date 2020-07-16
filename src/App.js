@@ -1,11 +1,26 @@
 import React from 'react';
-import './App.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+//Pages
+import { Login, Error, Dashboard, AuthWrapper } from './pages/index';
 
 function App() {
   return (
-    <div>
-    
-    </div>
+    <>
+      <Router>
+        <Switch>
+          <Route exact={true} path="/">
+            <Dashboard />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="*">
+            <Error />
+          </Route>
+        </Switch>
+      </Router>
+    </>
   );
 }
 
