@@ -1,9 +1,14 @@
-import React from 'react'
+import React from 'react';
+import { Navbar, Info, Search, User, Repos} from '../components/index';
 
 const Dashboard = () => {
     return (
         <div>
-            Dashboard
+            <Navbar />
+            <Search />
+            <Info />
+            <User />
+            <Repos />
         </div>
     )
 }
