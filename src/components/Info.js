@@ -56,8 +56,8 @@ const Item = ({ icon, label, value, color }) => {
     <article className="item">
       <span className={color}>{icon}</span>
       <div className="item__info">
-        <h3>{value}</h3>
-        <p>{label}</p>
+        <h3 className="item__value">{value}</h3>
+        <p className="item__label">{label}</p>
       </div>
     </article>
   );
@@ -74,25 +74,28 @@ const InfoWrapper = styled.section`
     justify-content: space-around;
     align-items: center;
     background: #f1f1f1;
-  }
-  span {
+    
+    &__value {
+    margin-bottom: 0;
+      }
+
+    &__label {
+    margin-top: 10px;
+    text-transform: capitalize;
+      }
+    span {
     width: 3.2rem;
     height: 3.2rem;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-  }
+    }
   .icon {
     font-size: 1.5rem;
+    }
   }
-  h3 {
-    margin-bottom: 0;
-  }
-  p {
-    margin-top: 10px;
-    text-transform: capitalize;
-  }
+  /* colors */
   .pink {
     background: pink;
   }
