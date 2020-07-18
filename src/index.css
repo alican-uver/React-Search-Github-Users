@@ -22,9 +22,26 @@ a {
   background: rgba(49, 61, 102, 0.534);
   padding: 0.7rem 1.2rem;
   border-radius: 5px;
-  color:#fff;
-  transition: .4s ease;
+  color: #fff;
+  transition: 0.4s ease;
 }
 .btn:hover {
   background: rgb(49, 61, 102);
+}
+
+.section {
+  padding: 1rem 0;
+  position: relative;
+}
+
+.section-center {
+  width: 95vw;
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 992px) {
+  .section-center {
+    width: 90vw;
+  }
 }
