@@ -1,11 +1,67 @@
-import React from 'react'
+import React, { useState } from "react";
+import styled from "styled-components";
+import { MdSearch } from "react-icons/md";
 
 const Search = () => {
-    return (
-        <div>
-            Search
-        </div>
-    )
-}
+  const [user, setUser] = useState("");
+  const submit = (e) => {
+    e.preventDefault();
+    if (user) {
+      // function will come from context 
+    }
+  };
 
-export default Search
+  return (
+    <section className="section">
+      <SearchWrapper className="section-center search">
+        <form onSubmit={submit} className="search__form">
+          <div className="search__control">
+            <MdSearch className="search__icon" />
+            <input
+              className="search__input"
+              type="text"
+              placeholder="search github user"
+              value={user}
+              onChange={(e) => setUser(e.target.value)}
+            />
+            <button className="search__button" type="submit" className="btn">
+              Search
+            </button>
+          </div>
+        </form>
+      </SearchWrapper>
+    </section>
+  );
+};
+
+const SearchWrapper = styled.div`
+  .search {
+    &__form {
+      background: #f1f1f1;
+      padding: 10px;
+      border-radius: 10px;
+    }
+    &__control {
+      width: 100;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 1rem;
+    }
+    &__input {
+      border: 0;
+      outline: 0;
+      background: transparent;
+      text-transform: uppercase;
+      padding: 10px;
+      &:focus {
+        outline: 1px solid #fff;
+      }
+    }
+    &__icon {
+        font-size: 25px;
+    }
+  }
+`;
+
+export default Search;
