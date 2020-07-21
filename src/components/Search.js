@@ -5,11 +5,12 @@ import { GithubContext } from "../context/context";
 
 const Search = () => {
   const [user, setUser] = useState("");
-  const { requests } = useContext(GithubContext);
+  const { requests, searchUser } = useContext(GithubContext);
   const submit = (e) => {
     e.preventDefault();
     if (user) {
       // function will come from context
+      searchUser(user);
     }
   };
 
@@ -69,8 +70,10 @@ const SearchWrapper = styled.div`
       border: 0;
       outline: 0;
       background: transparent;
-      text-transform: uppercase;
       padding: 10px;
+      &::placeholder {
+        text-transform: uppercase;
+      }
       &:focus {
         outline: 1px solid #fff;
       }
