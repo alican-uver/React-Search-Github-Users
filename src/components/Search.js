@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { MdSearch } from "react-icons/md";
+import { GithubContext } from "../context/context";
 
 const Search = () => {
   const [user, setUser] = useState("");
+  const { requests } = useContext(GithubContext);
   const submit = (e) => {
     e.preventDefault();
     if (user) {
-      // function will come from context 
+      // function will come from context
     }
   };
 
@@ -24,22 +26,37 @@ const Search = () => {
               value={user}
               onChange={(e) => setUser(e.target.value)}
             />
-            <button className="search__button" type="submit" className="btn">
-              Search
-            </button>
+            {requests > 0 && (
+              <button className="search__button" type="submit" className="btn">
+                Search
+              </button>
+            )}
           </div>
         </form>
+        <div className="search__requests">
+          <h3>
+            <strong>Requests</strong>: {requests} / 60
+          </h3>
+        </div>
       </SearchWrapper>
     </section>
   );
 };
 
 const SearchWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-flow: row wrap;
+  position: relative;
   .search {
     &__form {
       background: #f1f1f1;
       padding: 10px;
       border-radius: 10px;
+      flex: 1 1 auto;
+      @media screen and (min-width: 576px) {
+        margin-right: 2rem;
+      }
     }
     &__control {
       width: 100;
@@ -59,7 +76,13 @@ const SearchWrapper = styled.div`
       }
     }
     &__icon {
-        font-size: 25px;
+      font-size: 25px;
+    }
+    &__requests {
+      color: gray;
+      strong {
+        padding-right: 0.3rem;
+      }
     }
   }
 `;

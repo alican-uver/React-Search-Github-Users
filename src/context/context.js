@@ -3,6 +3,7 @@ import myInfo from './staticData/myInfo';
 import myRepos from './staticData/myRepos';
 import myFollowers from './staticData/myFollowers';
 import myFollowing from './staticData/myFollowing';
+import axios from 'axios';
 
 const rootUrl = "https://api.github.com";
 
@@ -14,13 +15,34 @@ const GithubProvider = ({ children }) => {
     const [followers, setFollowers] = useState(myFollowers);
     const [following, setFollowing] = useState(myFollowing);
 
-    const contextValue = {
-        githubUser, repos, followers, following
+    // Request
+    const [requests, setRequests] = useState(0);
+
+    // check requests limit
+    const checkRequests = () => {
+        axios(`${rootUrl}/rate_limit`)
+            .then((data) => {
+                console.log(data)
+                const { remaining } = data.data.rate;
+                setRequests(remaining);
+                if (remaining === 0) {
+                    // error!!
+                }
+            })
+            .catch(err => console.log(err));
     }
 
-    return <GithubContext.Provider value = {contextValue}>
+    useEffect(() => {
+        checkRequests();
+    }, []);
+
+    const contextValue = {
+        githubUser, repos, followers, following, requests
+    }
+
+    return <GithubContext.Provider value={contextValue}>
         {children}
     </GithubContext.Provider>
 }
 
-export {GithubProvider, GithubContext};
+export { GithubProvider, GithubContext };
