@@ -36,7 +36,7 @@ const Search = () => {
         </form>
         <div className="search__requests">
           <h3>
-            <strong>Requests</strong>: {requests} / 60
+            <strong>Request Limit</strong>: {requests} / 60
           </h3>
         </div>
       </SearchWrapper>

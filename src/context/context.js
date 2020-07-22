@@ -25,18 +25,28 @@ const GithubProvider = ({ children }) => {
         const response = await axios.get(`${rootUrl}/users/${user}`)
             .catch(err => console.log(err));
         if (response) {
-            console.log(response.data)
             setGithubUser(response.data)
-            const { login, followers_url, following_url } = response.data;
-            // get repos
-            axios(`${rootUrl}/users/${login}/repos?per_page=100`)
-                .then(response => setRepos(response.data));
-            // get followers
-            axios(`${rootUrl}/users/${login}/followers`)
-                .then(response => setFollowers(response.data));
-            // get following
-            axios(`${rootUrl}/users/${login}/following`)
-                .then(response => setFollowing(response.data));
+            const { login, followers_url } = response.data;
+
+            await Promise.allSettled([
+                axios(`${rootUrl}/users/${login}/repos?per_page=100`),
+                axios(`${followers_url}?per_page=100`),
+                axios(`${rootUrl}/users/${login}/following?per_page=100`)
+            ]).then((results) => {
+                const [repos, followers, following] = results;
+                const statusOk = "fulfilled";
+                if (repos.status === statusOk &&
+                    followers.status === statusOk &&
+                    following.status === statusOk) {
+                    setRepos(repos.value.data);
+                    setFollowers(followers.value.data);
+                    setFollowing(following.value.data);
+                }
+                else {
+                    console.log("sorry there is a error here.");
+
+                }
+            })
         }
         else {
             console.log("Sorry no user you search");
@@ -49,7 +59,6 @@ const GithubProvider = ({ children }) => {
     const checkRequests = () => {
         axios(`${rootUrl}/rate_limit`)
             .then((data) => {
-                console.log(data)
                 const { remaining } = data.data.rate;
                 setRequests(remaining);
                 if (remaining === 0) {
