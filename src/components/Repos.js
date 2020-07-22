@@ -5,7 +5,6 @@ import { Pie3D, Column3D, Bar3D, Doughnut3D } from "./Charts";
 
 const Repos = () => {
   const { repos } = useContext(GithubContext);
-  console.log(repos);
 
   // get language and convert it for charts 
   const languages = repos.reduce((total, item) => {
@@ -54,8 +53,6 @@ const Repos = () => {
 
   stars = Object.values(stars).slice(-5).reverse();
   forks = Object.values(forks).slice(-5).reverse();
-
-  console.log(stars)
 
   return (
     <section className="section">
