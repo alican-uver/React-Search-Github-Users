@@ -47,7 +47,7 @@ const Card = () => {
 };
 
 const CardWrapper = styled.div`
-  background: #f1f1f1;
+  background: #F8EFBA;
   padding: 1.5rem;
   .card {
     /* card header */

@@ -9,7 +9,6 @@ const Search = () => {
   const submit = (e) => {
     e.preventDefault();
     if (user) {
-      // function will come from context
       searchUser(user);
     }
   };

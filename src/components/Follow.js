@@ -11,14 +11,14 @@ const Follow = () => {
       <>
         <div className="buttons">
           <a
-            href="#followers"
+            href = "/#"
             className="btn"
             onClick={() => setIsFollowers(true)}
           >
             followers
           </a>
           <a
-            href="#following"
+            href = "/#"
             className="btn"
             onClick={() => setIsFollowers(false)}
           >
