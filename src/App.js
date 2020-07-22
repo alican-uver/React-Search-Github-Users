@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 //Pages
-import { Login, Error, Dashboard, AuthWrapper } from './pages/index';
+import { Login, Error, Dashboard } from './pages/index';
 
 function App() {
   return (
