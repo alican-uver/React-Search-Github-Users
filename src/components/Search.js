@@ -27,7 +27,7 @@ const Search = () => {
               onChange={(e) => setUser(e.target.value)}
             />
             {requests > 0 && (
-              <button className="search__button" type="submit" className="btn">
+              <button className="search__button btn" type="submit" >
                 Search
               </button>
             )}
