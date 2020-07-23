@@ -18,6 +18,7 @@ const GithubProvider = ({ children }) => {
     const [requests, setRequests] = useState(0);
     // loading 
     const [isLoading, setIsLoading] = useState(false);
+    const [isUserOk, setIsUserOk] = useState(true);
 
     // get github User with api
     const searchUser = async user => {
@@ -25,6 +26,7 @@ const GithubProvider = ({ children }) => {
         const response = await axios.get(`${rootUrl}/users/${user}`)
             .catch(err => console.log(err));
         if (response) {
+            setIsUserOk(true);
             setGithubUser(response.data)
             const { login, followers_url } = response.data;
 
@@ -49,7 +51,7 @@ const GithubProvider = ({ children }) => {
             })
         }
         else {
-            console.log("Sorry no user you search");
+            setIsUserOk(false);
         }
         checkRequests();
         setIsLoading(false);
@@ -74,7 +76,7 @@ const GithubProvider = ({ children }) => {
 
     const contextValue = {
         githubUser, repos, followers, following,
-        requests, searchUser, isLoading
+        requests, searchUser, isLoading, isUserOk
     }
 
     return <GithubContext.Provider value={contextValue}>
